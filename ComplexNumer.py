@@ -28,3 +28,24 @@ class ComplexNumer:
 
     def toRect(self) -> str:
         return f"{self.value.real.__round__(2)} {'+' if self.value.imag > 0 else '-'} {abs(self.value.imag.__round__(2))}j"
+
+class Resistor(ComplexNumer):
+    def __init__(self, name: str, resistorValue: float):
+        if resistorValue < 0: raise ValueError("Resistor value provided can't be negative.")
+        super().__init__(name, complex(resistorValue, 0))
+
+class Inductor(ComplexNumer):
+    def __init__(self, name: str, inductorValue: float, omega: float):
+        if inductorValue < 0: raise ValueError("Inductor value provided can't be negative.")
+        super().__init__(name, complex(0, omega * inductorValue))
+
+class Capacitor(ComplexNumer):
+    def __init__(self, name: str, capacitorValue: float, omega: float):
+        if capacitorValue < 0: raise ValueError("Capacitor value provided can't be negative.")
+        super().__init__(name, complex(0, -(1 / omega * capacitorValue)))
+
+class VoltajeSource(ComplexNumer):
+    def __init__(self, name: str, voltage:float, phase:float):
+        if voltage < 0: raise ValueError("Voltage provided can't be negative.")
+        super().__init__(name, complex(cmath.rect(voltage,phase)))
+    
