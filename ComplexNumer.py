@@ -1,9 +1,9 @@
 import cmath
 
 
+
 class ComplexNumer:
-    value = complex()
-    name = ""
+    omega = 0
 
     def __init__(self, name: str, complex: complex):
         self.name = name
@@ -28,6 +28,12 @@ class ComplexNumer:
 
     def toRect(self) -> str:
         return f"{self.value.real.__round__(2)} {'+' if self.value.imag > 0 else '-'} {abs(self.value.imag.__round__(2))}j"
+    
+    def setOmega(self, newOmega):
+        self.omega = newOmega
+    
+    def getOmega(self):
+        return self.omega
 
 class Resistor(ComplexNumer):
     def __init__(self, name: str, resistorValue: float):
@@ -35,14 +41,14 @@ class Resistor(ComplexNumer):
         super().__init__(name, complex(resistorValue, 0))
 
 class Inductor(ComplexNumer):
-    def __init__(self, name: str, inductorValue: float, omega: float):
+    def __init__(self, name: str, inductorValue: float):
         if inductorValue < 0: raise ValueError("Inductor value provided can't be negative.")
-        super().__init__(name, complex(0, omega * inductorValue))
+        super().__init__(name, complex(0, self.getOmega() * inductorValue))
 
 class Capacitor(ComplexNumer):
     def __init__(self, name: str, capacitorValue: float, omega: float):
         if capacitorValue < 0: raise ValueError("Capacitor value provided can't be negative.")
-        super().__init__(name, complex(0, -(1 / omega * capacitorValue)))
+        super().__init__(name, complex(0, -(1 / self.getOmega() * capacitorValue)))
 
 class VoltajeSource(ComplexNumer):
     def __init__(self, name: str, voltage:float, phase:float):
