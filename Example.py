@@ -2,7 +2,7 @@ from Calculator import calc
 from ComplexNumer import *
 
 
-ComplexNumer.setOmega(100)
+ComplexNumer.setOmega(ComplexNumer, 100)
 
 V = VoltageSource("V", 20, 1)
 R = Resistor("R", 220)
