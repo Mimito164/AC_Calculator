@@ -1,13 +1,13 @@
-import cmath
 from Calculator import calc
-from ComplexNumer import ComplexNumer
+from ComplexNumer import *
 
 
-omega = 100
-V = ComplexNumer("V", complex(cmath.rect(20, 1)))
-R = ComplexNumer("R", complex(220, 0))
-C = ComplexNumer("C", complex(0, -(1/(omega * 100e-3))))
-L = ComplexNumer("L", complex(0, omega * 25e-3))
+ComplexNumer.setOmega(ComplexNumer, 100)
+
+V = VoltageSource("V", 20, 1)
+R = Resistor("R", 220)
+C = Capacitor("C", 100e-3)
+L = Inductor("L", 25e-3)
 
 if __name__ == "__main__":
     zp = calc.paralel("Zp", L, R, True)
