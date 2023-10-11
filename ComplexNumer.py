@@ -55,7 +55,8 @@ class Capacitor(ComplexNumer):
     def __init__(self, name: str, capacitorValue: float):
         if capacitorValue < 0:
             raise ValueError("Capacitor value provided can't be negative.")
-        super().__init__(name, complex(0, -(1 / self.getOmega() * capacitorValue)))
+        XC = (self.getOmega() * capacitorValue)**-1
+        super().__init__(name, complex(0, -XC))
 
 
 class Source(ComplexNumer):
